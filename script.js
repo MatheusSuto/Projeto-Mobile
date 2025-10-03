@@ -132,33 +132,64 @@ function copyCoupon(couponCode) {
 }
 
 document.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = this.getAttribute('data-target');
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = this.getAttribute('data-target');
 
-    // Hide all non-hero pages
-    document.querySelectorAll('.page-section').forEach(section => {
-      if (section.id !== "hero") { 
-        section.classList.remove('active');
-        section.style.display = "none";
-      }
+        // Hide all non-hero pages
+        document.querySelectorAll('.page-section').forEach(section => {
+            if (section.id !== "hero") {
+                section.classList.remove('active');
+                section.style.display = "none";
+            }
+        });
+
+        // Special case: if target is hero (Home)
+        if (target === "hero") {
+            document.getElementById("hero").style.display = "block";
+            document.getElementById("hero").classList.add("active");
+        } else {
+            // Hide hero
+            document.getElementById("hero").style.display = "none";
+            document.getElementById("hero").classList.remove("active");
+
+            // Show requested page
+            const section = document.getElementById(target);
+            if (section) {
+                section.style.display = "block";
+                section.classList.add("active");
+            }
+        }
     });
-
-    // Special case: if target is hero (Home)
-    if (target === "hero") {
-      document.getElementById("hero").style.display = "block";
-      document.getElementById("hero").classList.add("active");
-    } else {
-      // Hide hero
-      document.getElementById("hero").style.display = "none";
-      document.getElementById("hero").classList.remove("active");
-
-      // Show requested page
-      const section = document.getElementById(target);
-      if (section) {
-        section.style.display = "block";
-        section.classList.add("active");
-      }
-    }
-  });
 });
+
+// Show the correct tab content based on the active button
+function showProfileTab() {
+    document.getElementById('profileTab').classList.add('bg-gray-900');
+    document.getElementById('loginTab').classList.remove('bg-gray-900');
+    document.getElementById('registerTab').classList.remove('bg-gray-900');
+    document.getElementById('profileContent').classList.remove('hidden');
+    document.getElementById('loginContent').classList.add('hidden');
+    document.getElementById('registerContent').classList.add('hidden');
+}
+
+function showLoginTab() {
+    document.getElementById('loginTab').classList.add('bg-gray-900');
+    document.getElementById('profileTab').classList.remove('bg-gray-900');
+    document.getElementById('registerTab').classList.remove('bg-gray-900');
+    document.getElementById('loginContent').classList.remove('hidden');
+    document.getElementById('profileContent').classList.add('hidden');
+    document.getElementById('registerContent').classList.add('hidden');
+}
+
+function showRegisterTab() {
+    document.getElementById('registerTab').classList.add('bg-gray-900');
+    document.getElementById('loginTab').classList.remove('bg-gray-900');
+    document.getElementById('profileTab').classList.remove('bg-gray-900');
+    document.getElementById('registerContent').classList.remove('hidden');
+    document.getElementById('loginContent').classList.add('hidden');
+    document.getElementById('profileContent').classList.add('hidden');
+}
+
+// Default to the Profile tab
+showProfileTab();
