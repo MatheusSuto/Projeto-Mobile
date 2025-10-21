@@ -193,3 +193,4 @@ function showRegisterTab() {
 
 // Default to the Profile tab
 showProfileTab();
+
