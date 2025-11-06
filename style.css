@@ -11,18 +11,18 @@ body {
 }
 
 .page-section {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    text-align: center;
-    padding-right: 50%;
+  display: none;
 }
 
 .page-section.active {
-    display: block;
-    opacity: 1;
-    text-align: left;
+  display: block;
+}
 
+/* Hero-specific centering */
+.hero-section.active {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 768px) {
